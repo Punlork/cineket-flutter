@@ -8,8 +8,8 @@ void main() {
   final variables = envConfigure(DevAppEnv());
 
   FlavorConfig(
-    name: variables[EnvVariable.env.name] as String,
-    variables: variables,
+    name: variables.appName,
+    variables: variables.toMap(),
   );
   bootstrap(() => const App());
 }

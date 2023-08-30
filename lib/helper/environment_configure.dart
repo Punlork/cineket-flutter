@@ -1,9 +1,8 @@
 import 'package:cineket/environment_variable.dart';
+import 'package:flutter_flavor/flutter_flavor.dart';
 
-enum EnvVariable { appName, baseUrl, env }
+AppEnv envConfigure(AppEnv appEnv) =>
+    AppEnv(appEnv.env, appEnv.appName, appEnv.baseUrl, appEnv.baseImageUrl);
 
-Map<String, dynamic> envConfigure(AppEnv appEnv) => {
-      EnvVariable.appName.name: appEnv.appName,
-      EnvVariable.baseUrl.name: appEnv.baseUrl,
-      EnvVariable.env.name: appEnv.env,
-    };
+String getEnvVariable(String key) =>
+    FlavorConfig.instance.variables[key].toString();

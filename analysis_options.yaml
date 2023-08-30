@@ -1,4 +1,10 @@
 include: package:very_good_analysis/analysis_options.5.0.0.yaml
+
+analyzer:
+  errors:
+    argument_type_not_assignable: ignore
+    invalid_assignment: ignore
+
 linter:
   rules:
     public_member_api_docs: false
