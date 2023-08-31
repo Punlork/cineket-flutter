@@ -1,125 +1,64 @@
-import 'package:cineket/now_showing/views/now_showing.dart';
+import 'package:cineket/app/widgets/custom_box_shadow.dart';
+import 'package:cineket/movie/movie.dart';
 import 'package:cineket/theme/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_flavor/flutter_flavor.dart';
+import 'package:flutter_floating_bottom_bar/flutter_floating_bottom_bar.dart';
 
-class MainPage extends StatefulWidget {
+class MainPage extends StatelessWidget {
   const MainPage({super.key});
 
   @override
-  State<MainPage> createState() => _MainPageState();
-}
-
-class _MainPageState extends State<MainPage>
-    with SingleTickerProviderStateMixin {
-  late final TabController _tabController;
-  int activeIndex = 0;
-
-  final List<Tab> _myTabs = const [
-    Tab(text: 'Now Showing'),
-    Tab(text: 'Popular'),
-    Tab(text: 'Top Rated'),
-    Tab(text: 'Up Coming'),
-  ];
-
-  final List<Widget> _children = [
-    const NowShowing(),
-    const Text('Popular'),
-    const Text('Top Rated'),
-    const Text('Up Coming'),
-  ];
-
-  void _tabListener() {
-    if (_tabController.indexIsChanging) {
-      setState(() {
-        activeIndex = _tabController.index;
-      });
-    }
-  }
-
-  @override
-  void initState() {
-    _tabController = TabController(length: _myTabs.length, vsync: this)
-      ..addListener(_tabListener);
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _tabController
-      ..removeListener(_tabListener)
-      ..dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    const appBarTitle = 'Welcome, Guys!';
-    const appBarSubtitle =
-        'There are lots of interesting movies to watch today!';
-
     return DefaultTabController(
-      length: _myTabs.length,
-      child: Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          backgroundColor: Colors.transparent,
-          title: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                appBarTitle,
-                style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
-              ),
-              const SizedBox(height: 5),
-              Text(
-                appBarSubtitle,
-                style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                      color: Colors.grey,
-                    ),
-              ),
-            ],
-          ),
-          actions: [
-            Container(
-              height: 50,
-              width: 50,
-              decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.black,
-              ),
+      length: 3,
+      child: BottomBar(
+        barColor: AppColors.backgroundColor.withOpacity(.5),
+        borderRadius: BorderRadius.circular(30),
+        barDecoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(30),
+          color: AppColors.backgroundColor.withOpacity(.5),
+          boxShadow: [
+            CustomBoxShadow(
+              color: AppColors.primary.withOpacity(.5),
+              blurRadius: 5,
+              blurStyle: BlurStyle.outer,
             ),
           ],
-          bottom: TabBar(
-            isScrollable: true,
+        ),
+        body: (context, controller) => const TabBarView(
+          physics: NeverScrollableScrollPhysics(),
+          children: [
+            MovieScreen(),
+            Text('Movies'),
+            Text('Movies'),
+          ],
+        ),
+        child: Theme(
+          data: ThemeData(
+            highlightColor: Colors.transparent,
+            splashColor: Colors.transparent,
+          ),
+          child: TabBar(
+            indicatorSize: TabBarIndicatorSize.label,
             indicatorColor: AppColors.primary,
-            labelColor: AppColors.primary,
+            indicatorPadding: const EdgeInsets.only(bottom: 5),
+            indicatorWeight: 1,
             labelStyle: Theme.of(context).textTheme.labelLarge?.copyWith(
                   fontWeight: FontWeight.bold,
+                  color: Colors.white,
                 ),
-            unselectedLabelStyle: Theme.of(context).textTheme.labelLarge,
-            unselectedLabelColor: Colors.grey,
-            indicatorSize: TabBarIndicatorSize.label,
-            controller: _tabController,
-            tabs: _myTabs
-                .map<Widget>(
-                  (tab) => Tab(
-                    child: Text(
-                      activeIndex == _myTabs.indexOf(tab)
-                          ? '\u2022  ${tab.text!}'
-                          : tab.text!,
+            unselectedLabelStyle:
+                Theme.of(context).textTheme.labelLarge?.copyWith(
+                      color: Colors.grey,
+                      fontWeight: FontWeight.w400,
                     ),
-                  ),
-                )
-                .toList(),
+            padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+            tabs: const [
+              Tab(text: 'Movies'),
+              Tab(text: 'Tv Show'),
+              Tab(text: 'Actors'),
+            ],
           ),
-        ),
-        body: TabBarView(
-          controller: _tabController,
-          children: _children,
         ),
       ),
     );

@@ -19,7 +19,7 @@ class App extends StatelessWidget {
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
         home: BlocProvider(
-          create: (context) => NowShowingBloc()..add(NowShowingRequested()),
+          create: (context) => NowShowingBloc(),
           child: const MainPage(),
         ),
       ),

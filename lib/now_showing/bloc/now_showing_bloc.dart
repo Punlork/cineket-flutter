@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:cineket/helper/object_logger.dart';
+import 'package:cineket/helper/path.dart';
 import 'package:cineket/now_showing/models/response.dart';
 import 'package:cineket/now_showing/service/service.dart';
 import 'package:equatable/equatable.dart';
@@ -21,7 +23,7 @@ class NowShowingBloc extends Bloc<NowShowingEvent, NowShowingState> {
     Emitter<NowShowingState> emit,
   ) async {
     emit(NowShowingLoading());
-    final results = await services.nowShowingRequest();
+    final results = await services.nowShowingRequest(path: event.path);
 
     if (results == null) {
       emit(NowShowingFailed());
@@ -29,7 +31,13 @@ class NowShowingBloc extends Bloc<NowShowingEvent, NowShowingState> {
     }
 
     results.fold(
-      (l) => emit(NowShowingLoaded(result: nowShowingResFromJson(l!))),
+      (l) {
+        if (l == null) {
+          emit(NowShowingFailed());
+          return;
+        }
+        emit(NowShowingLoaded(result: nowShowingResFromJson(l)));
+      },
       (r) => emit(NowShowingFailed()),
     );
   }
