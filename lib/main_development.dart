@@ -11,5 +11,6 @@ void main() {
     name: variables.appName,
     variables: variables.toMap(),
   );
+
   bootstrap(() => const App());
 }

@@ -1,37 +1,33 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cineket/app/widgets/bottom_bar_inherited.dart';
-import 'package:cineket/movie/views/now_showing.dart';
-import 'package:cineket/movie/views/popular.dart';
-import 'package:cineket/movie/views/top_rated.dart';
-import 'package:cineket/movie/views/up_coming.dart';
 import 'package:cineket/theme/theme.dart';
+import 'package:cineket/tv_show/views/views.dart';
 import 'package:flutter/material.dart';
 
-class MovieScreen extends StatefulWidget {
-  const MovieScreen({super.key});
+class TvShowScreen extends StatefulWidget {
+  const TvShowScreen({super.key});
 
   @override
-  State<MovieScreen> createState() => _MovieScreenState();
+  State<TvShowScreen> createState() => _TvShowScreenState();
 }
 
-class _MovieScreenState extends State<MovieScreen>
+class _TvShowScreenState extends State<TvShowScreen>
     with SingleTickerProviderStateMixin {
   late final TabController _tabController;
 
   int activeIndex = 0;
 
   final List<Tab> _myTabs = const [
-    Tab(text: 'Now Showing'),
+    Tab(text: 'Air Today'),
+    Tab(text: 'On the Air'),
     Tab(text: 'Popular'),
     Tab(text: 'Top Rated'),
-    Tab(text: 'Up Coming'),
   ];
 
   final List<Widget> _children = [
-    const NowShowingView(),
-    const PopularView(),
-    const TopRatedView(),
-    const UpComingView(),
+    const TvAirTodayView(),
+    const TvOnAirView(),
+    const TvPopularView(),
+    const TvTopRatedView(),
   ];
 
   void _tabListener() {
@@ -63,7 +59,6 @@ class _MovieScreenState extends State<MovieScreen>
       length: _myTabs.length,
       child: Scaffold(
         appBar: TabBar(
-          isScrollable: true,
           indicatorColor: AppColors.primary,
           labelColor: AppColors.primary,
           labelStyle: Theme.of(context).textTheme.labelLarge?.copyWith(

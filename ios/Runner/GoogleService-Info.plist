@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>808881322992-7iofhvvrv6ge9kmc26715veuuj4mdlpn.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.808881322992-7iofhvvrv6ge9kmc26715veuuj4mdlpn</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAA7cKliWo331q1W_-Z0WGP0qjuAc2F87E</string>
+	<key>GCM_SENDER_ID</key>
+	<string>808881322992</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.cineket.app</string>
+	<key>PROJECT_ID</key>
+	<string>cineket-c36b3</string>
+	<key>STORAGE_BUCKET</key>
+	<string>cineket-c36b3.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:808881322992:ios:8f314dcdd7b8584a00fb35</string>
+</dict>
+</plist>

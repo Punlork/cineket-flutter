@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "808881322992",
+    "project_id": "cineket-c36b3",
+    "storage_bucket": "cineket-c36b3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:808881322992:android:ee9bb98ed5176b4f00fb35",
+        "android_client_info": {
+          "package_name": "com.cineket.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "808881322992-ljb137kbeme9nnbllll312fv17tf0gsm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTtz8rXOM7IERYO8NXyZ1DV3PjSCCoPiw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "808881322992-ljb137kbeme9nnbllll312fv17tf0gsm.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "808881322992-7iofhvvrv6ge9kmc26715veuuj4mdlpn.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.cineket.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
