@@ -1,3 +1,4 @@
+import 'package:cineket/actors/view/actor_screen.dart';
 import 'package:cineket/app/widgets/bottom_bar_inherited.dart';
 import 'package:cineket/app/widgets/custom_bottom_bar.dart';
 import 'package:cineket/app/widgets/custom_box_shadow.dart';
@@ -79,7 +80,7 @@ class MainPage extends StatelessWidget {
                 children: [
                   MovieScreen(),
                   TvShowScreen(),
-                  Text('Movies'),
+                  ActorScreen(),
                 ],
               ),
             ),
@@ -108,7 +109,7 @@ class MainPage extends StatelessWidget {
             tabs: const [
               Tab(text: 'Movies'),
               Tab(text: 'Tv Show'),
-              Tab(text: 'Actors'),
+              Tab(text: 'People'),
             ],
           ),
         ),

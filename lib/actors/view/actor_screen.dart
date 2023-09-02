@@ -1,22 +1,22 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cineket/actors/actors.dart';
+import 'package:cineket/actors/widget/actor_card.dart';
 import 'package:cineket/app/widgets/bottom_bar_inherited.dart';
 import 'package:cineket/app/widgets/loading.dart';
-import 'package:cineket/helper/genre_finder.dart';
-import 'package:cineket/movie/movie.dart';
+import 'package:cineket/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_flavor/flutter_flavor.dart';
 
-class MovieView extends StatefulWidget {
-  const MovieView({
-    super.key,
-  });
+class ActorScreen extends StatefulWidget {
+  const ActorScreen({super.key});
 
   @override
-  State<MovieView> createState() => _MovieViewState();
+  State<ActorScreen> createState() => _ActorScreenState();
 }
 
-class _MovieViewState extends State<MovieView>
-    with AutomaticKeepAliveClientMixin {
+class _ActorScreenState extends State<ActorScreen> {
   late final ScrollController _controller;
   late final BottomBarInherited? bottomBarInherited;
   late bool isScrollingDown;
@@ -65,47 +65,37 @@ class _MovieViewState extends State<MovieView>
 
   @override
   Widget build(BuildContext context) {
-    super.build(context);
-
-    return BlocBuilder<MovieBloc, MovieState>(
+    return BlocBuilder<ActorsBloc, ActorsState>(
       builder: (context, state) {
-        if (state is MovieLoading || state is MovieInitial) {
+        if (state is ActorsInitial || state is ActorsLoading) {
           return const CircularLoading();
-        } else if (state is MovieLoaded) {
-          final nowShowingMovie = state.result.results;
-          return GridView.builder(
+        } else if (state is ActorsLoaded) {
+          final actors = state.result.results;
+
+          return ListView.builder(
+            padding: const EdgeInsets.all(20),
             controller: _controller,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              childAspectRatio: 2.2 / 4,
-              mainAxisSpacing: 20,
-              crossAxisSpacing: 20,
-            ),
-            itemCount: nowShowingMovie.length,
             itemBuilder: (context, index) {
-              final genres =
-                  findMovieGenreNames(nowShowingMovie[index].genreIds);
-              return MovieCard(
-                title: nowShowingMovie[index].title,
-                posterPath: nowShowingMovie[index].posterPath,
-                releaseDate: nowShowingMovie[index].releaseDate,
-                rating: nowShowingMovie[index].voteAverage,
-                reviewer: nowShowingMovie[index].voteCount,
-                genres: genres,
+              final baseImageUrl =
+                  FlavorConfig.instance.variables['baseImageUrl'];
+              final actor = actors[index];
+              final profileUrl = '$baseImageUrl${actor.profilePath}';
+              return ActorCard(
+                profileUrl: profileUrl,
+                name: actor.name,
+                knownForDepartment: actor.knownForDepartment,
+                popularity: actor.popularity,
+                knownFor: actor.knownFor,
               );
             },
-            // shrinkWrap: true,
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+            itemCount: actors.length,
           );
-        } else if (state is MovieFailed) {
-          return const Center(child: Text('Request Error'));
+        } else if (state is ActorsFailed) {
+          return const Text('Request Failed');
         } else {
-          return const Center(child: Text('Something Went Wrong!'));
+          return const Text('Something went wrong');
         }
       },
     );
   }
-
-  @override
-  bool get wantKeepAlive => true;
 }

@@ -1,3 +1,4 @@
+import 'package:cineket/actors/actors.dart';
 import 'package:cineket/app/app.dart';
 import 'package:cineket/l10n/l10n.dart';
 import 'package:cineket/movie/bloc/bloc.dart';
@@ -26,6 +27,9 @@ class App extends StatelessWidget {
             ),
             BlocProvider(
               create: (context) => TvShowBloc(),
+            ),
+            BlocProvider(
+              create: (context) => ActorsBloc()..add(OnActorRequest()),
             ),
           ],
           child: const MainPage(),

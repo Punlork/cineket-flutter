@@ -10,6 +10,8 @@ abstract class ApiPath {
   static const String TV_ON_AIR = 'tv/on_the_air';
   static const String TV_POPULAR = 'tv/popular';
   static const String TV_TOP_RATED = 'tv/top_rated';
+
+  static const String ACTOR_POPULAR = 'person/popular';
 }
 
 abstract class SvgPath {

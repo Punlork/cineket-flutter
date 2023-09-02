@@ -8,11 +8,15 @@ class AppColors {
   static const backgroundColor = Color(0xff1C1C27);
 }
 
+TextTheme? _getTextTheme() => const TextTheme().apply(
+      bodyColor: Colors.white,
+      decorationColor: Colors.white,
+    );
+
 class AppTheme {
-  static const _textTheme = TextTheme();
   static final themeData = ThemeData(
     scaffoldBackgroundColor: AppColors.backgroundColor,
-    textTheme: _textTheme,
+    textTheme: _getTextTheme(),
     fontFamily: 'Lato',
   );
 }

@@ -17,24 +17,29 @@ class TvShowBloc extends Bloc<TvShowEvent, TvShowState> {
     TvShowRequested event,
     Emitter<TvShowState> emit,
   ) async {
-    emit(TvShowLoading());
-    final result = await service.onTvShowRequest(path: event.path);
-    if (result == null) {
+    try {
+      emit(TvShowLoading());
+      final result = await service.onTvShowRequest(path: event.path);
+      if (result == null) {
+        emit(TvShowFailed());
+        return;
+      }
+
+      result.fold(
+        (l) {
+          if (l == null) {
+            emit(TvShowFailed());
+            return;
+          }
+
+          final result = tvShowResFromJson(l);
+          emit(TvShowLoaded(result: result));
+        },
+        (r) => emit(TvShowFailed()),
+      );
+    } catch (e) {
+      print(e);
       emit(TvShowFailed());
-      return;
     }
-
-    result.fold(
-      (l) {
-        if (l == null) {
-          emit(TvShowFailed());
-          return;
-        }
-
-        final result = tvShowResFromJson(l);
-        emit(TvShowLoaded(result: result));
-      },
-      (r) => emit(TvShowFailed()),
-    );
   }
 }

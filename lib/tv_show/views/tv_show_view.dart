@@ -1,4 +1,6 @@
 import 'package:cineket/app/widgets/bottom_bar_inherited.dart';
+import 'package:cineket/app/widgets/loading.dart';
+import 'package:cineket/helper/genre_finder.dart';
 import 'package:cineket/movie/movie.dart';
 import 'package:cineket/tv_show/tv_show.dart';
 import 'package:flutter/material.dart';
@@ -61,9 +63,7 @@ class _TvShowState extends State<TvShowView>
     return BlocBuilder<TvShowBloc, TvShowState>(
       builder: (context, state) {
         if (state is TvShowLoading) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
+          return const CircularLoading();
         } else if (state is TvShowLoaded) {
           final tvShow = state.result.results;
           return GridView.builder(
@@ -75,14 +75,17 @@ class _TvShowState extends State<TvShowView>
               crossAxisSpacing: 20,
             ),
             itemCount: tvShow.length,
-            itemBuilder: (context, index) => MovieCard(
-              title: tvShow[index].name,
-              posterPath: tvShow[index].posterPath,
-              releaseDate: tvShow[index].firstAirDate,
-              rating: tvShow[index].voteAverage,
-              reviewer: tvShow[index].voteCount,
-              genreIds: tvShow[index].genreIds,
-            ),
+            itemBuilder: (context, index) {
+              final genres = findTvShowGenreNames(tvShow[index].genreIds);
+              return MovieCard(
+                title: tvShow[index].name,
+                posterPath: tvShow[index].posterPath,
+                releaseDate: tvShow[index].firstAirDate,
+                rating: tvShow[index].voteAverage,
+                reviewer: tvShow[index].voteCount,
+                genres: genres,
+              );
+            },
             // shrinkWrap: true,
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
           );

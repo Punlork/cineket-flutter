@@ -50,7 +50,9 @@ class TvShowResult {
 
   factory TvShowResult.fromJson(Map<String, dynamic> json) => TvShowResult(
         backdropPath: json['backdrop_path'],
-        firstAirDate: DateTime.parse(json['first_air_date']),
+        firstAirDate: json['first_air_date'] != ''
+            ? DateTime.parse(json['first_air_date'])
+            : null,
         genreIds: List<int>.from(json['genre_ids'].map((x) => x)),
         id: json['id'],
         name: json['name'],
@@ -65,7 +67,7 @@ class TvShowResult {
       );
 
   final String backdropPath;
-  final DateTime firstAirDate;
+  final DateTime? firstAirDate;
   final List<int> genreIds;
   final int id;
   final String name;
