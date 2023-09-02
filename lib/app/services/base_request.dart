@@ -1,3 +1,4 @@
+import 'package:cineket/enviroment.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_flavor/flutter_flavor.dart';
@@ -10,8 +11,7 @@ final baseOptions = BaseOptions(
   receiveTimeout: const Duration(seconds: 3),
   headers: {
     'content-Type': 'application/json',
-    'authorization':
-        'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjMDU0NTc3NTNiMmJmMjU3OTMyOGIzZTA3MmU3YmQyMCIsInN1YiI6IjYzNmRiMGUxZDdmYmRhMDA5MDVjZjg5NyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.XCacq94EPh2_4dIOmSbRjGv1Hbm3Z6-llg7G9zsx5zQ',
+    'authorization': 'Bearer ${Environment.apiKey}',
   },
 );
 

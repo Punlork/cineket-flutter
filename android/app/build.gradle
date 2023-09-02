@@ -90,7 +90,7 @@ android {
         }
         staging {
             dimension "default"
-            applicationIdSuffix ".stg"
+            applicationIdSuffix ""
             manifestPlaceholders = [appName: "[STG] Cineket"]
         }
         development {
