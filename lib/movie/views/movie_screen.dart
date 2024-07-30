@@ -14,8 +14,7 @@ class MovieScreen extends StatefulWidget {
   State<MovieScreen> createState() => _MovieScreenState();
 }
 
-class _MovieScreenState extends State<MovieScreen>
-    with SingleTickerProviderStateMixin {
+class _MovieScreenState extends State<MovieScreen> with SingleTickerProviderStateMixin {
   late final TabController _tabController;
 
   int activeIndex = 0;
@@ -44,8 +43,7 @@ class _MovieScreenState extends State<MovieScreen>
 
   @override
   void initState() {
-    _tabController = TabController(length: _myTabs.length, vsync: this)
-      ..addListener(_tabListener);
+    _tabController = TabController(length: _myTabs.length, vsync: this)..addListener(_tabListener);
     super.initState();
   }
 
@@ -72,14 +70,13 @@ class _MovieScreenState extends State<MovieScreen>
           unselectedLabelStyle: Theme.of(context).textTheme.labelLarge,
           unselectedLabelColor: Colors.grey,
           indicatorSize: TabBarIndicatorSize.label,
+          tabAlignment: TabAlignment.start,
           controller: _tabController,
           tabs: _myTabs
               .map<Widget>(
                 (tab) => Tab(
                   child: AutoSizeText(
-                    activeIndex == _myTabs.indexOf(tab)
-                        ? '\u2022  ${tab.text!}'
-                        : tab.text!,
+                    activeIndex == _myTabs.indexOf(tab) ? '\u2022  ${tab.text!}' : tab.text!,
                     maxLines: 1,
                   ),
                 ),

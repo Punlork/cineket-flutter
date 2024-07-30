@@ -15,8 +15,7 @@ class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const appBarTitle = 'Welcome, Guys!';
-    const appBarSubtitle =
-        'There are lots of interesting movies to watch today!';
+    const appBarSubtitle = 'There are lots of interesting movies to watch today!';
 
     return DefaultTabController(
       length: 3,
@@ -46,29 +45,30 @@ class MainPage extends StatelessWidget {
                 title: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    SvgPicture.asset(
-                      SvgPath.TMDB_LOGO,
-                      height: 40,
+                    Flexible(
+                      child: SvgPicture.asset(
+                        SvgPath.TMDB_LOGO,
+                        height: 40,
+                      ),
                     ),
+                    const SizedBox(width: 10),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         Text(
                           appBarTitle,
-                          style:
-                              Theme.of(context).textTheme.titleLarge?.copyWith(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    letterSpacing: 1.5,
-                                  ),
+                          style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                letterSpacing: 1.5,
+                              ),
                         ),
                         const SizedBox(height: 5),
                         Text(
                           appBarSubtitle,
-                          style:
-                              Theme.of(context).textTheme.labelMedium?.copyWith(
-                                    color: Colors.grey,
-                                  ),
+                          style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                                color: Colors.grey,
+                              ),
                         ),
                       ],
                     ),
@@ -97,13 +97,13 @@ class MainPage extends StatelessWidget {
             indicatorPadding: const EdgeInsets.only(bottom: 5),
             indicatorWeight: 1,
             labelColor: AppColors.primary,
+            dividerHeight: 0,
             labelStyle: Theme.of(context).textTheme.labelLarge?.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
-            unselectedLabelStyle:
-                Theme.of(context).textTheme.labelLarge?.copyWith(
-                      fontWeight: FontWeight.w400,
-                    ),
+            unselectedLabelStyle: Theme.of(context).textTheme.labelLarge?.copyWith(
+                  fontWeight: FontWeight.w400,
+                ),
             unselectedLabelColor: Colors.grey,
             padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
             tabs: const [

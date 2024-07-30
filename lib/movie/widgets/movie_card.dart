@@ -27,12 +27,20 @@ class MovieCard extends StatelessWidget {
   final int reviewer;
   final List<String> genres;
 
+  String formatNumber(int number) {
+    if (number >= 1000000) {
+      return '${(number / 1000000).toStringAsFixed(1)}M';
+    } else if (number >= 1000) {
+      return '${(number / 1000).toStringAsFixed(1)}K';
+    }
+    return number.toString();
+  }
+
   @override
   Widget build(BuildContext context) {
     final baseImageUrl = getEnvVariable('baseImageUrl');
     final dateFormat = DateFormat('dd MMM yyyy');
-    final formattedDate =
-        releaseDate == null ? '' : dateFormat.format(releaseDate!);
+    final formattedDate = releaseDate == null ? '' : dateFormat.format(releaseDate!);
 
     return InkWell(
       onTap: () => {},
@@ -93,12 +101,11 @@ class MovieCard extends StatelessWidget {
                           title,
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
-                          style:
-                              Theme.of(context).textTheme.titleMedium?.copyWith(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w700,
-                                    letterSpacing: 0.5,
-                                  ),
+                          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w700,
+                                letterSpacing: 0.5,
+                              ),
                         ),
                         const SizedBox(height: 5),
                         Wrap(
@@ -107,10 +114,7 @@ class MovieCard extends StatelessWidget {
                             genres.length,
                             (index) => Text(
                               '${genres[index]}${index != genres.length - 1 ? ', ' : ''}',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .labelMedium!
-                                  .copyWith(
+                              style: Theme.of(context).textTheme.labelMedium!.copyWith(
                                     color: Colors.white,
                                   ),
                             ),
@@ -121,8 +125,7 @@ class MovieCard extends StatelessWidget {
                     ),
                   ),
                 ),
-                progressIndicatorBuilder: (context, url, downloadProgress) =>
-                    Center(
+                progressIndicatorBuilder: (context, url, downloadProgress) => Center(
                   child: CircularProgressIndicator(
                     value: downloadProgress.progress,
                     color: AppColors.primary,
@@ -168,12 +171,14 @@ class MovieCard extends StatelessWidget {
                         color: AppColors.primary,
                         size: 20,
                       ),
-                      Text(
-                        ' | $reviewer reviews',
-                        style:
-                            Theme.of(context).textTheme.labelMedium!.copyWith(
-                                  color: Colors.white,
-                                ),
+                      Flexible(
+                        child: AutoSizeText(
+                          ' | ${formatNumber(reviewer)} reviews',
+                          overflow: TextOverflow.ellipsis,
+                          style: Theme.of(context).textTheme.labelMedium!.copyWith(
+                                color: Colors.white,
+                              ),
+                        ),
                       ),
                     ],
                   ),
