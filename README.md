@@ -10,9 +10,6 @@ This app allows user to check or book cinema movies/tv_shows in a few clicks wit
 
 
 <img width="522" alt="image" src="https://github.com/user-attachments/assets/47919570-e0a5-42a5-929b-cb30f2cfffe1">
-<img width="444" alt="image" src="https://github.com/user-attachments/assets/d46076dd-a965-43f8-8afe-0b702615f588">
-<img width="482" alt="image" src="https://github.com/user-attachments/assets/eb255988-eec2-48b4-aca2-ea9d5e006b9a">
-
 
 [coverage_badge]: coverage_badge.svg
 [flutter_localizations_link]: https://api.flutter.dev/flutter/flutter_localizations/flutter_localizations-library.html
